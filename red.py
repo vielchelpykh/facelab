@@ -8,7 +8,7 @@ VIDEO = cv.VideoCapture(0)
 MP_HOLISTIC = mp.solutions.holistic
 
 def getTriangles():
-    with open("triangles.json", "r", encoding="utf-8") as file:
+    with open("face_triangles_path.json", "r", encoding="utf-8") as file:
         triangles = json.load(file)
         return triangles
 
