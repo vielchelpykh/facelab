@@ -28,7 +28,7 @@ def findAllFaceTriangles():
                 else:
                     point_second_edge = 1
                     point_first_edge = 0
-
+            #FIXME
             if second_edge[point_second_edge] == first_edge[point_first_edge]:
                 for third_edge in FACE_MESH_EDGES:
                     if (third_edge[0] == second_edge[(point_second_edge+1)%2] and \
