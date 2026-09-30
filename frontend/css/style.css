@@ -82,6 +82,7 @@ header {
 }
 .header__nav {
   display: flex;
+  align-items: center;
 }
 .header__nav-item {
   margin-right: 50px;
@@ -89,6 +90,33 @@ header {
 }
 .header__nav-item:last-child {
   margin-right: 0;
+}
+.header__nav-link img {
+  margin-right: 5px;
+}
+.header__nav-languages {
+  background: transparent;
+  appearance: none;
+  font:
+    500 18px "Manrope",
+    sans-serif;
+  color: #fff;
+  padding: 5px 22px 5px 10px;
+  border-radius: 10px;
+  border: 1px solid #fff;
+  color: #fff;
+}
+.header__select {
+  position: relative;
+}
+.header__select img {
+  top: 50%;
+  transform: translateY(-50%);
+  right: 20%;
+  position: absolute;
+}
+.header__nav-language {
+  color: #000;
 }
 .header__bottom {
   margin-bottom: 150px;
@@ -182,6 +210,19 @@ header {
   position: relative;
   transition: color 0.25s ease-in;
 }
+.for__list-text {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.for__list-text p {
+  font:
+    500 18px "Manrope",
+    sans-serif;
+  color: #fff;
+  opacity: 0;
+  transition: opacity 0.25s ease-in;
+}
 .for__list-item img {
   width: 280px;
   height: 280px;
@@ -216,6 +257,9 @@ header {
   color: #fff;
 }
 .for__list-item:hover img {
+  opacity: 1;
+}
+.for__list-item:hover .for__list-text p {
   opacity: 1;
 }
 /* ***********************************TASKS************************************ */
@@ -365,8 +409,7 @@ header {
   font:
     500 16px "Manrope",
     sans-serif;
-
-  width: 440px;
+  width: 415px;
   height: 530px;
   border: 1px solid #36c0d9;
   border-radius: 25px;
@@ -388,6 +431,7 @@ header {
 }
 .solutions__card-img img {
   border-radius: 20px;
+  width: 100%;
 }
 .solutions__card {
   display: flex;
@@ -451,8 +495,14 @@ header {
 .touch__author-media:last-child {
   margin-right: 0;
 }
+.touch__form {
+  width: 100%;
+}
+.touch__rigth {
+  width: 100%;
+}
 .touch__name {
-  width: 1120px;
+  width: 100%;
   height: 70px;
   background: #045589;
   border-radius: 15px;
@@ -464,7 +514,7 @@ header {
   background: #045589;
   border-radius: 15px;
   padding: 15px;
-  width: 555px;
+  width: 100%;
   height: 70px;
   margin-right: 5px;
   margin-bottom: 5px;
@@ -473,14 +523,14 @@ header {
   background: #045589;
   border-radius: 15px;
   padding: 15px;
-  width: 555px;
+  width: 100%;
   height: 70px;
   margin-bottom: 5px;
 }
 .touch__message {
   border-radius: 15px;
   padding: 15px;
-  width: 1120px;
+  width: 100%;
   height: 160px;
   background: #045589;
   display: block;
@@ -517,6 +567,7 @@ footer {
     sans-serif;
   color: #fff;
   margin-right: auto;
+  max-width: 480px;
 }
 .footer__arrow {
   display: flex;
@@ -531,7 +582,7 @@ footer {
 }
 .footer__bottom p {
   font:
-    700 380px / 0.78947 "Montserrat",
+    700 355px / 0.78947 "Montserrat",
     sans-serif;
   text-transform: uppercase;
   color: #fff;
