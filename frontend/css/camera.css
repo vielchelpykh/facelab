@@ -1,0 +1,46 @@
+.camera h1.camera__heading {
+  background: linear-gradient(90deg, #2568ff 0%, #00178a 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.camera__heading {
+  margin: 70px 0px 40px 0;
+}
+.camera__inner {
+  display: flex;
+  gap: 50px;
+}
+.camera__block p {
+  margin-top: 25px;
+  margin-bottom: 65px;
+
+  max-width: 330px;
+}
+.camera__block img {
+  width: 491px;
+  height: 510px;
+}
+.camera__block {
+  flex: 4;
+  border: 3px dashed #36c0d9;
+  border-radius: 20px;
+  text-align: center;
+  padding-top: 25px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.camera__controls {
+  flex: 1;
+  padding: 30px;
+  border-radius: 20px;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.camera__controls p {
+  margin-top: 10px;
+  margin-bottom: 23px;
+}

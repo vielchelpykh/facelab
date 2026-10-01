@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./css/reset.css" />
+    <link rel="stylesheet" href="./css/style.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="wrapper">
+      <header id="header" class="blur_header"></header>
+      <main>
+        <section class="video">
+          <div class="container">
+            <h1 class="video__heading">Hide faces instantly</h1>
+            <div class="video__inner">
+              <div class="video__original window">
+                <div class="video__original-content">
+                  <h2>Your original video</h2>
+                  <p>
+                    Drag a video here or click to select. MP4, MOV, and AVI are
+                    supported
+                  </p>
+                </div>
+                <img src="./img/girl.png" alt="" />
+              </div>
+              <div class="video__blurred window">
+                <div class="video__blurred-content">
+                  <h2>Your blurred video</h2>
+                  <p>
+                    Your video with blurred faces will appear here after
+                    processing
+                  </p>
+                </div>
+                <img src="./img/boy.png" alt="" />
+              </div>
+              <div class="video__controls">
+                <h2>Video controls</h2>
+                <p>Upload, adjust, blur, and download</p>
+                <div class="video__strength">
+                  <p>Blur strength</p>
+                  <input type="range" min="0" max="100" value="50" />
+                </div>
+                <div class="video__what">
+                  <p>What to blur</p>
+                  <div class="video__checkboxes">
+                    <div class="video__checkbox">
+                      <input type="checkbox" id="eyes" />
+                      <label for="">Eyes</label>
+                    </div>
+                    <div class="video__checkbox">
+                      <input type="checkbox" id="mouth" />
+                      <label for="">Mouth</label>
+                    </div>
+                    <div class="video__checkbox">
+                      <input type="checkbox" id="contours" />
+                      <label for="">Contours</label>
+                    </div>
+                  </div>
+                </div>
+                <div class="video__buttons">
+                  <button class="video__button button">Upload</button>
+                  <button class="video__button button">Blur</button>
+                  <button class="video__button button">Download</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+      <footer id="footer"></footer>
+    </div>
+  </body>
+  <script src="./js/header.js"></script>
+  <script src="./js/footer.js"></script>
+</html>
