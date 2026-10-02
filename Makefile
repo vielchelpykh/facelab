@@ -5,7 +5,7 @@ run-venv:
 	source .venv/bin/activate
 
 install-libraries:
-	uv pip install -r requirements.txt
+	.venv/bin/python -m pip install -r requirements.txt
 
 run:
 	python main.py
