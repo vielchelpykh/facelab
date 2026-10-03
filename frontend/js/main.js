@@ -12,7 +12,7 @@ const blurredVideo = document.getElementById('blurredVideo');
 
 // Состояние
 let selectedFile = null;
-let uploadedVideo = null;   // {id, version, ...}
+let uploadedVideo = null;
 let blurredVideoData = null;
 
 // ============ 1. Upload ============
@@ -29,10 +29,16 @@ videoInput.addEventListener('change', async (e) => {
     originalVideo.hidden = false;
     originalContent.hidden = true;
 
-    // Отправить в Go
+    // Сбросить blur, если было предыдущее видео
+    blurredVideo.hidden = true;
+    blurredContent.hidden = false;
+    blurBtn.disabled = true;
+    blurBtn.textContent = 'Blur';
+    downloadBtn.disabled = true;
+
     try {
         uploadBtn.disabled = true;
-        uploadBtn.textContent = 'Загрузка...';
+        uploadBtn.textContent = 'Loading...';
 
         const formData = new FormData();
         formData.append('video', file);
@@ -45,13 +51,12 @@ videoInput.addEventListener('change', async (e) => {
         if (!resp.ok) throw new Error(await resp.text());
 
         uploadedVideo = await resp.json();
-        // {id, version, file_name, file_path, file_size, created_at}
 
         blurBtn.disabled = false;
-        uploadBtn.textContent = 'Загружено ✓';
+        uploadBtn.textContent = 'Uploaded';
 
     } catch (err) {
-        alert('Ошибка загрузки: ' + err.message);
+        alert('Upload error: ' + err.message);
         uploadBtn.textContent = 'Upload';
         uploadBtn.disabled = false;
     }
@@ -63,7 +68,7 @@ blurBtn.addEventListener('click', async () => {
 
     try {
         blurBtn.disabled = true;
-        blurBtn.textContent = 'Обработка...';
+        blurBtn.textContent = 'Processing...';
 
         const resp = await fetch(`${API_URL}/videos`, {
             method: 'PATCH',
@@ -77,7 +82,6 @@ blurBtn.addEventListener('click', async () => {
         if (!resp.ok) throw new Error(await resp.text());
 
         blurredVideoData = await resp.json();
-        // {id, version, file_name, file_path, file_size, ..., original_video_id}
 
         // Показать заблюренное
         const fileURL = `${API_URL}/videos/${blurredVideoData.id}/file`;
@@ -86,10 +90,10 @@ blurBtn.addEventListener('click', async () => {
         blurredContent.hidden = true;
 
         downloadBtn.disabled = false;
-        blurBtn.textContent = 'Готово ✓';
+        blurBtn.textContent = 'Done';
 
     } catch (err) {
-        alert('Ошибка размытия: ' + err.message);
+        alert('Blur error: ' + err.message);
         blurBtn.textContent = 'Blur';
         blurBtn.disabled = false;
     }

@@ -2,124 +2,152 @@ import cv2 as cv
 import mediapipe as mp
 import numpy as np
 import json
-from fastapi import FastAPI, status, HTTPException
+import subprocess
+from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 import os
 
 
-def getPath(file_name):
-            with open(file_name, "r", encoding="utf-8") as file:
-                edges = json.load(file)
-                return edges
-
-def getFaceTrianglesPath():
-    return getPath("./json/face_triangles_path.json")
-
-def getLeftEyePath():
-    return getPath("./json/left_eye_path.json")
-
-def getRigthEyePath():
-    return getPath("./json/right_eye_path.json")
-
-def getLipsPath():
-    return getPath("./json/lips_path.json")
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 
-faceTrianglesPath = getFaceTrianglesPath()
-leftEyePath = getLeftEyePath()
-rigthEyePath = getRigthEyePath()
-lipsPath = getLipsPath()
+def get_path(file_name):
+    with open(file_name, "r", encoding="utf-8") as file:
+        return json.load(file)
+
+
+faceTrianglesPath = get_path(os.path.join(BASE_DIR, "json", "face_triangles_path.json"))
+leftEyePath = get_path(os.path.join(BASE_DIR, "json", "left_eye_path.json"))
+rigthEyePath = get_path(os.path.join(BASE_DIR, "json", "right_eye_path.json"))
+lipsPath = get_path(os.path.join(BASE_DIR, "json", "lips_path.json"))
 
 
 app = FastAPI()
 
 
 class VideoDTO(BaseModel):
-    fileName: str
-    filePath: str
+    file_name: str
+    file_path: str
+
 
 class VideoDomain(BaseModel):
-    fileName: str
-    filePath: str
-    fileSize: int
+    file_name: str
+    file_path: str
+    file_size: int
 
 
 @app.patch("/videos")
 def videoBlur(videoDTO: VideoDTO) -> VideoDomain:
-    cap = cv.VideoCapture(videoDTO.filePath)
+    cap = cv.VideoCapture(videoDTO.file_path)
     if not cap.isOpened():
-         raise HTTPException(400, "Cannot open file")
+        raise HTTPException(400, "Cannot open file")
 
     fps = cap.get(cv.CAP_PROP_FPS)
     width = int(cap.get(cv.CAP_PROP_FRAME_WIDTH))
     height = int(cap.get(cv.CAP_PROP_FRAME_HEIGHT))
 
-
-    # folder = os.getenv("BLURRED_VIDEOS_FOLDER")
-    folder = "../blurred_videos_folder"
+    folder = os.getenv("BLURRED_VIDEOS_FOLDER", "../blurred_videos_folder")
     os.makedirs(folder, exist_ok=True)
 
-    newFileName = f"blurred_{videoDTO.fileName}.mp4"
+    name = videoDTO.file_name
+    if not name.endswith(".mp4"):
+        name += ".mp4"
+    newFileName = f"blurred_{name}"
     newFilePath = os.path.join(folder, newFileName)
 
+    # 1. Пишем во временный файл (mp4v)
+    tmpPath = newFilePath + ".tmp.mp4"
     fourcc = cv.VideoWriter_fourcc(*"mp4v")
-    out = cv.VideoWriter(newFilePath, fourcc, fps, (width, height))
-    
-    MP_HOLISTIC = mp.solutions.holistic
+    out = cv.VideoWriter(tmpPath, fourcc, fps, (width, height))
 
-    with MP_HOLISTIC.Holistic(min_detection_confidence=0.5, min_tracking_confidence=0.5) as holistic:
+    if not out.isOpened():
+        raise HTTPException(500, "Cannot open VideoWriter")
+
+    MP_FACE_MESH = mp.solutions.face_mesh
+
+    with MP_FACE_MESH.FaceMesh(
+        max_num_faces=15,
+        min_detection_confidence=0.3,
+        min_tracking_confidence=0.3,
+    ) as face_mesh:
         while cap.isOpened():
             ret, frame = cap.read()
             if not ret:
                 break
 
             imageRGB = cv.cvtColor(frame, cv.COLOR_BGR2RGB)
-
-            results = holistic.process(imageRGB)
-
+            results = face_mesh.process(imageRGB)
             imageBGR = cv.cvtColor(imageRGB, cv.COLOR_RGB2BGR)
 
-            
-            if results.face_landmarks:
-                points = []
-                for id, landmark in enumerate(results.face_landmarks.landmark):
-                    height, width = imageBGR.shape[:2]
-                    current_x = int(landmark.x * width)
-                    current_y = int(landmark.y * height)
-                    points.append([current_x, current_y])
+            if results.multi_face_landmarks:
+                h, w = imageBGR.shape[:2]
 
-            blurred = cv.GaussianBlur(imageBGR, (51, 51), 0)
-            mask = np.zeros(imageBGR.shape[:2], dtype=np.uint8)
+                mask = np.zeros(imageBGR.shape[:2], dtype=np.uint8)
+                blurred = cv.GaussianBlur(imageBGR, (51, 51), 0)
 
-            for i in range(len(faceTrianglesPath)):
-                np_polygon = np.array([
-                    points[faceTrianglesPath[i][0]], 
-                    points[faceTrianglesPath[i][1]],
-                    points[faceTrianglesPath[i][2]]],
-                    dtype=np.int32,
-                    )       
-                cv.fillPoly(mask, [np_polygon], 255)
+                for face_landmarks in results.multi_face_landmarks:
+                    points = []
 
-            np_polygon = np.array([points[element] for pair in leftEyePath for element in pair], dtype=np.int32)   
-            cv.fillPoly(mask, [np_polygon], 255)
+                    for landmark in face_landmarks.landmark:
+                        current_x = int(landmark.x * w)
+                        current_y = int(landmark.y * h)
+                        points.append([current_x, current_y])
 
-            np_polygon = np.array([points[element] for pair in rigthEyePath for element in pair], dtype=np.int32)   
-            cv.fillPoly(mask, [np_polygon], 255)
+                    for i in range(len(faceTrianglesPath)):
+                        np_polygon = np.array([
+                            points[faceTrianglesPath[i][0]],
+                            points[faceTrianglesPath[i][1]],
+                            points[faceTrianglesPath[i][2]],
+                        ], dtype=np.int32)
+                        cv.fillPoly(mask, [np_polygon], 255)
 
-            np_polygon = np.array([points[element] for pair in lipsPath for element in pair], dtype=np.int32)   
-            cv.fillPoly(mask, [np_polygon], 255)
-                
-            imageBGR[mask == 255] = blurred[mask == 255]
+                    np_polygon = np.array(
+                        [points[element] for pair in leftEyePath for element in pair],
+                        dtype=np.int32,
+                    )
+                    cv.fillPoly(mask, [np_polygon], 255)
+
+                    np_polygon = np.array(
+                        [points[element] for pair in rigthEyePath for element in pair],
+                        dtype=np.int32,
+                    )
+                    cv.fillPoly(mask, [np_polygon], 255)
+
+                    np_polygon = np.array(
+                        [points[element] for pair in lipsPath for element in pair],
+                        dtype=np.int32,
+                    )
+                    cv.fillPoly(mask, [np_polygon], 255)
+
+                imageBGR[mask == 255] = blurred[mask == 255]
 
             out.write(imageBGR)
-            
+
     out.release()
     cap.release()
 
+    # 2. Конвертируем mp4v
+    try:
+        subprocess.run([
+            "ffmpeg", "-y",
+            "-i", tmpPath,
+            "-c:v", "libx264",
+            "-preset", "fast",
+            "-crf", "23",
+            "-pix_fmt", "yuv420p",
+            "-movflags", "+faststart",
+            newFilePath,
+        ], check=True, capture_output=True)
+    except subprocess.CalledProcessError as e:
+        raise HTTPException(500, f"ffmpeg error: {e.stderr.decode()}")
+    finally:
+        if os.path.exists(tmpPath):
+            os.remove(tmpPath)
+
     newFileSize = os.path.getsize(newFilePath)
 
-    return VideoDomain (
-        fileName=newFileName,
-        filePath=newFilePath,
-        fileSize=newFileSize,
+    return VideoDomain(
+        file_name=newFileName,
+        file_path=newFilePath,
+        file_size=newFileSize,
     )

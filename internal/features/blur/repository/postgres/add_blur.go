@@ -15,14 +15,13 @@ func (r *BlurRepository) AddBlur(
 	defer cancel()
 
 	query := `
-	INSERT INTO facelab.blur (id, version, file_name, file_path, file_size, created_at, original_video_id)
-	VALUES ($1, $2, $3, $4, $5, $6, $7)
+	INSERT INTO facelab.blur (file_name, file_path, file_size, created_at, original_video_id)
+	VALUES ($1, $2, $3, $4, $5)
 	RETURNING id, version, file_name, file_path, file_size, created_at, original_video_id
 	`
 	row := r.Pool.QueryRow(
 		ctx,
 		query,
-		blur.ID,
 		blur.FileName,
 		blur.FilePath,
 		blur.FileSize,
@@ -33,6 +32,7 @@ func (r *BlurRepository) AddBlur(
 	var blurModel BlurModel
 	if err := row.Scan(
 		&blurModel.ID,
+		&blurModel.Version,
 		&blurModel.FileName,
 		&blurModel.FilePath,
 		&blurModel.FileSize,

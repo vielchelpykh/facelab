@@ -9,7 +9,7 @@ import (
 
 type BlurService struct {
 	blurRepository BlurRepository
-	blurHTTPClient core_http_client.Client
+	blurHTTPClient *core_http_client.Client
 }
 
 type BlurRepository interface {
@@ -25,11 +25,15 @@ type BlurRepository interface {
 		ctx context.Context,
 		blur domain.VideoBlurDomain,
 	) (domain.VideoBlurDomain, error)
+	GetBlurredByID(
+		ctx context.Context,
+		id int,
+	) (domain.VideoBlurDomain, error)
 }
 
 func NewBlurService(
 	blurRepository BlurRepository,
-	blurHTTPClient core_http_client.Client,
+	blurHTTPClient *core_http_client.Client,
 ) *BlurService {
 	return &BlurService{
 		blurRepository: blurRepository,

@@ -1,0 +1,11 @@
+.venv/
+__pycache__/
+*.pyc
+node_modules/
+out/
+blurred_videos_folder/
+original_videos_folder/
+.git/
+*.md
+frontend/
+python/

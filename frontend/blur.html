@@ -23,11 +23,11 @@
                       Drag a video here or click to select. MP4, MOV, and AVI are
                       supported
                     </p>
+                    <img src="./img/girl.png" alt="" />
                   </div>
-                  <img src="./img/girl.png" alt="" />
+                  <video id="originalVideo" class="video__player" controls hidden></video>
+                  <input type="file" id="videoInput" accept="video/*" hidden>
                 </div>
-                <video id="originalVideo" class="video__player" controls hidden></video>
-                <input type="file" id="videoInput" accept="video/*" hidden>
               </div>
               <div class="video__second">
                 <div class="video__blurred window">
@@ -37,10 +37,10 @@
                       Your video with blurred faces will appear here after
                       processing
                     </p>
+                    <img src="./img/boy.png" alt="" />
                   </div>
-                  <img src="./img/boy.png" alt="" />
+                  <video id="blurredVideo" class="video__player" controls hidden></video>
                 </div>
-                <video id="blurredVideo" class="video__player" controls hidden></video>
               </div>
               <div class="video__controls">
                 <h2>Video controls</h2>

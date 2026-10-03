@@ -19,9 +19,7 @@ func (r *BlurRepository) GetVideo(
 	query := `
 	SELECT id, version, file_name, file_path, file_size, created_at
 	FROM facelab.videos
-	WHERE
-		id=$1,
-		version=$2;
+	WHERE id=$1 AND version=$2;
 	`
 
 	row := r.Pool.QueryRow(

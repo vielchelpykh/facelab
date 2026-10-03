@@ -1,23 +1,104 @@
 services:
+  # ============ PostgreSQL ============
   postgres:
     image: postgres:18.1-bookworm
     container_name: app-postgres
     environment:
       - POSTGRES_USER=${POSTGRES_USER}
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
-      - POSTGRES_DB=${POSTGRES_DATABASE}
+      - POSTGRES_DB=${POSTGRES_DB}
     volumes:
-      - ${PROJECT_ROOT}/out/pgdata:/var/lib/postgres
+      - postgres_data:/var/lib/postgresql
     restart: always
-  
+    networks:
+      - app-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER}"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  # ============ Миграции ============
   migrate:
     image: migrate/migrate:v4.19.1
     volumes:
       - ${PROJECT_ROOT}/migrations:/migrations
-  
+    networks:
+      - app-network
+
+  # ============ Port forwarder (для локального доступа) ============
   port-forwarder:
     image: alpine/socat:1.8.0.3
     container_name: socat-port-forwarder
-    command: tcp-listen:5432,for,reuseaddr tcp-connect:postgres:5432
+    command: tcp-listen:5432,fork,reuseaddr tcp-connect:postgres:5432
     ports:
       - "127.0.0.1:5432:5432"
+    networks:
+      - app-network
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  # ============ Go backend ============
+  go-backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: app-go
+    environment:
+      LOGGER_LEVEL: DEBUG
+      LOGGER_FOLDER: /app/out/logs
+      POSTGRES_HOST: postgres
+      POSTGRES_PORT: 5432
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DATABASE: ${POSTGRES_DB}
+      BLUR_SERVICE_URL: http://python-service:8000
+      ORIGINAL_VIDEOS_FOLDER: /shared/original
+      BLURRED_VIDEOS_FOLDER: /shared/blurred
+      HTTP_ADDRESS: :8080
+      HTTP_SHUTDOWN_TIMEOUT: 30s
+    ports:
+      - "8080:8080"
+    volumes:
+      - shared_videos:/shared
+    networks:
+      - app-network
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  # ============ Python service ============
+  python-service:
+    build:
+      context: ./python
+      dockerfile: Dockerfile
+    container_name: app-python
+    environment:
+      ORIGINAL_VIDEOS_FOLDER: /shared/original
+      BLURRED_VIDEOS_FOLDER: /shared/blurred
+    ports:
+      - "8000:8000"
+    volumes:
+      - shared_videos:/shared
+    networks:
+      - app-network
+
+  # ============ Frontend (nginx) ============
+  frontend:
+    image: nginx:alpine
+    container_name: app-frontend
+    ports:
+      - "3000:80"
+    volumes:
+      - ${PROJECT_ROOT}/frontend:/usr/share/nginx/html:ro
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
+
+volumes:
+  postgres_data:
+  shared_videos:

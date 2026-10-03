@@ -24,15 +24,21 @@
 .video__original {
 }
 .window {
-  flex: 2;
   text-align: center;
-  padding-top: 25px;
+  padding: 25px;
   border: 3px dashed #36c0d9;
   border-radius: 20px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+.video__first {
+  flex: 2;
+}
+
+.video__second {
+  flex: 2;
 }
 .window p {
   max-width: 330px;

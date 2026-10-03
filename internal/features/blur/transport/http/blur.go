@@ -12,7 +12,7 @@ import (
 )
 
 type PatchVideoDTO struct {
-	ID      int `json:"id" validate:"required, dt=0"`
+	ID      int `json:"id" validate:"required,gt=0"`
 	Version int `json:"version" validate:"required,gt=0"`
 }
 

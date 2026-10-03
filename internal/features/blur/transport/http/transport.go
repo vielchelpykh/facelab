@@ -19,6 +19,10 @@ type BlurService interface {
 		ctx context.Context,
 		patchVideoDomain domain.VideoPatchDomain,
 	) (domain.VideoBlurDomain, error)
+	GetBlurredByID(
+		ctx context.Context,
+		id int,
+	) (domain.VideoBlurDomain, error)
 }
 
 func NewBlurHTTPHandler(blurService BlurService) *BlurHTTPHandler {

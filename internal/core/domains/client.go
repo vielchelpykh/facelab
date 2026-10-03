@@ -1,7 +1,7 @@
 package domain
 
 type ClientDomain struct {
-	FileName string `json:"fileName" validate:"required"`
-	FilePath string `json:"filePath" validate:"required"`
-	FileSize int64  `json:"fileSize" validate:"required, dt=0"`
+	FileName string `json:"file_name" validate:"required"`
+	FilePath string `json:"file_path" validate:"required"`
+	FileSize int64  `json:"file_size" validate:"required,gt=0"`
 }

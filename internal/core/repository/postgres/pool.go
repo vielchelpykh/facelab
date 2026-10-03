@@ -18,11 +18,12 @@ func NewPool(
 	config Config,
 ) (*Pool, error) {
 	connectionString := fmt.Sprintf(
-		"postgres://%s:%s@%s/%s?sslmode=disable",
+		"postgres://%s:%s@%s:%s/%s?sslmode=disable",
 		config.User,
 		config.Password,
 		config.Host,
 		config.Port,
+		config.Database,
 	)
 
 	poolConfig, err := pgxpool.ParseConfig(connectionString)

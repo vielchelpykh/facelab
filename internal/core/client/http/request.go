@@ -11,8 +11,8 @@ import (
 )
 
 type ClientDTO struct {
-	FileName string `json:"fileName"`
-	FilePath string `json:"filePath"`
+	FileName string `json:"file_name"`
+	FilePath string `json:"file_path"`
 }
 
 func (c *Client) BlurVideo(ctx context.Context, fileName string, filePath string) (domain.ClientDomain, error) {
@@ -28,7 +28,7 @@ func (c *Client) BlurVideo(ctx context.Context, fileName string, filePath string
 
 	request, err := http.NewRequestWithContext(
 		ctx,
-		http.MethodPost,
+		http.MethodPatch,
 		c.baseURL+"/videos",
 		bytes.NewReader(jsonBody),
 	)
@@ -47,7 +47,7 @@ func (c *Client) BlurVideo(ctx context.Context, fileName string, filePath string
 	}
 
 	var clientDomain domain.ClientDomain
-	if err := DecodeAndValidateResponse(response, clientDomain); err != nil {
+	if err := DecodeAndValidateResponse(response, &clientDomain); err != nil {
 		return domain.ClientDomain{}, fmt.Errorf("decode and validate response: %w", err)
 	}
 
