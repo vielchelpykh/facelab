@@ -1,0 +1,8 @@
+{
+    "workbench.tree.indent": 24,
+    "workbench.tree.renderIndentGuides": "always",
+    "workbench.tree.horizontalScrolling": true,
+    "workbench.tree.fontSize": 14,
+    "explorer.compactFolders": false,
+    "explorer.decorations.badges": true
+}

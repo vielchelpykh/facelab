@@ -15,25 +15,32 @@
           <div class="container">
             <h1 class="video__heading">Hide faces instantly</h1>
             <div class="video__inner">
-              <div class="video__original window">
-                <div class="video__original-content">
-                  <h2>Your original video</h2>
-                  <p>
-                    Drag a video here or click to select. MP4, MOV, and AVI are
-                    supported
-                  </p>
+              <div class="video__first">
+                <div class="video__original window">
+                  <div class="video__original-content" id="originalContent">
+                    <h2>Your original video</h2>
+                    <p>
+                      Drag a video here or click to select. MP4, MOV, and AVI are
+                      supported
+                    </p>
+                  </div>
+                  <img src="./img/girl.png" alt="" />
                 </div>
-                <img src="./img/girl.png" alt="" />
+                <video id="originalVideo" class="video__player" controls hidden></video>
+                <input type="file" id="videoInput" accept="video/*" hidden>
               </div>
-              <div class="video__blurred window">
-                <div class="video__blurred-content">
-                  <h2>Your blurred video</h2>
-                  <p>
-                    Your video with blurred faces will appear here after
-                    processing
-                  </p>
+              <div class="video__second">
+                <div class="video__blurred window">
+                  <div class="video__blurred-content" id="blurredContent">
+                    <h2>Your blurred video</h2>
+                    <p>
+                      Your video with blurred faces will appear here after
+                      processing
+                    </p>
+                  </div>
+                  <img src="./img/boy.png" alt="" />
                 </div>
-                <img src="./img/boy.png" alt="" />
+                <video id="blurredVideo" class="video__player" controls hidden></video>
               </div>
               <div class="video__controls">
                 <h2>Video controls</h2>
@@ -60,9 +67,9 @@
                   </div>
                 </div>
                 <div class="video__buttons">
-                  <button class="video__button button">Upload</button>
-                  <button class="video__button button">Blur</button>
-                  <button class="video__button button">Download</button>
+                  <button class="video__button button" id="uploadBtn">Upload</button>
+                  <button class="video__button button" id="blurBtn">Blur</button>
+                  <button class="video__button button" id="downloadBtn">Download</button>
                 </div>
               </div>
             </div>
@@ -74,4 +81,5 @@
   </body>
   <script src="./js/header.js"></script>
   <script src="./js/footer.js"></script>
+  <script src="./js/main.js"></script>
 </html>
