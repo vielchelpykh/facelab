@@ -1,0 +1,123 @@
+/* ***********************HEADER************************** */
+/* ***********************HEADER************************** */
+.color-logo,
+.header__select,
+.header__nav-link {
+  filter: brightness(0);
+}
+
+/* ***********************MAIN************************** */
+/* ***********************MAIN************************** */
+.video h1.video__heading {
+  background: linear-gradient(90deg, #2568ff 0%, #00178a 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.video__heading {
+  margin: 70px 0px 40px 0;
+}
+.video__inner {
+  display: flex;
+  gap: 20px;
+}
+.video__original {
+}
+.window {
+  flex: 2;
+  text-align: center;
+  padding-top: 25px;
+  border: 3px dashed #36c0d9;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.window p {
+  max-width: 330px;
+  margin-top: 25px;
+  margin-bottom: 63px;
+}
+.video__blurred {
+}
+.video__controls {
+  flex: 1;
+  padding: 30px;
+  border-radius: 20px;
+  background: #fff;
+}
+.video__controls p {
+  margin-top: 10px;
+  margin-bottom: 23px;
+}
+.video__strength {
+}
+.video__strength p {
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+.video__strength input[type="range"] {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 8px;
+  border-radius: 50px;
+  background-color: #d9d9d9;
+}
+.video__strength input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  border-radius: 100px;
+  width: 34px;
+  height: 15px;
+  background: #2568ff;
+  cursor: pointer;
+}
+.video__strength {
+  margin-bottom: 20px;
+}
+.video__strength input[type="range"]::-moz-range-thumb {
+  border-radius: 100px;
+  width: 34px;
+  height: 15px;
+  background: #2568ff;
+  cursor: pointer;
+  border: none;
+}
+.video__what {
+  margin-bottom: 20px;
+}
+.video__what > p {
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+.video__checkboxes {
+  display: flex;
+  gap: 10px;
+}
+.video__checkbox {
+  border: 1px solid rgba(178, 178, 178, 0.6);
+  border-radius: 10px;
+  padding: 5px 9px;
+}
+.video__checkbox label {
+  font:
+    500 16px "Manrope",
+    sans-serif;
+  color: #000;
+}
+.video__buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.video__button {
+  min-width: 100%;
+}
+.button {
+}
+.video__player {
+    width: 100%;
+    max-width: 500px;
+    border-radius: 12px;
+    background: #000;
+}

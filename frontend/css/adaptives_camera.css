@@ -1,0 +1,12 @@
+@media (max-width: 860px) {
+    .camera__inner {
+        flex-direction: column;
+    }
+    .camera__inner {
+        flex: 1;
+        width: 100%;
+    }
+    .camera__block img {
+        max-width: 100%;
+    }
+}

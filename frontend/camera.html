@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./css/reset.css" />
+    <link rel="stylesheet" href="./css/style.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="wrapper">
+      <header id="header"></header>
+      <main>
+        <section class="camera">
+          <div class="container">
+            <h1 class="camera__heading">Check the blur in real time</h1>
+            <div class="camera__inner">
+              <div class="camera__block">
+                <h2>Your webcam</h2>
+                <p>Press "Turn on," and you'll see yourself here</p>
+                <img src="./img/boy.png" alt="" />
+              </div>
+              <div class="camera__controls">
+                <div class="camera__functions">
+                    <h2>Webcam controls</h2>
+                    <p>Upload, adjust, and blur</p>
+                    <div class="video__strength">
+                      <p>Blur strength</p>
+                      <input type="range" min="0" max="100" value="50" />
+                    </div>
+                    <div class="video__what">
+                      <p>What to blur</p>
+                      <div class="video__checkboxes">
+                        <div class="video__checkbox">
+                          <input type="checkbox" id="eyes" />
+                          <label for="">Eyes</label>
+                        </div>
+                        <div class="video__checkbox">
+                          <input type="checkbox" id="mouth" />
+                          <label for="">Mouth</label>
+                        </div>
+                        <div class="video__checkbox">
+                          <input type="checkbox" id="contours" />
+                          <label for="">Contours</label>
+                        </div>
+                      </div>
+                    </div>
+                </div>
+                <div class="video__buttons">
+                  <button class="video__button button">Turn on</button>
+                  <button class="video__button button">Blur</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+      <footer id="footer"></footer>
+    </div>
+  </body>
+  <script src="./js/header.js"></script>
+  <script src="./js/footer.js"></script>
+</html>
