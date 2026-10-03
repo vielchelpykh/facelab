@@ -1,3 +1,7 @@
 .vscode/
 .venv/
 .env
+python/red.py
+python/video.py
+python/test.py
+python/__pycache__/
