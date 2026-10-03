@@ -1,0 +1,425 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./css/reset.css" />
+    <link rel="stylesheet" href="./css/style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap"
+      rel="stylesheet"
+    />
+    <title>FACELAB</title>
+  </head>
+  <body>
+    <div class="wrapper">
+      <header class="header-main">
+        <div id="header"></div>
+        <div class="header__bottom">
+          <div class="container">
+            <h1 class="header__heading">Protect your privacy on video</h1>
+            <p class="header_text">
+              A service for automatically blurring faces in videos. Upload your
+              clip and get the result in a couple of minutes. Safe, fast, and no
+              complex settings
+            </p>
+            <button class="header__button button">Get started</button>
+          </div>
+        </div>
+      </header>
+      <main>
+        <section class="about">
+          <div class="about__top">
+            <div class="container">
+              <div class="about__top-inner">
+                <div class="about__descriptor descriptor">/ About project</div>
+                <h2 class="about__heading">
+                  This project was developed as part of the "Computer Graphics"
+                  course at HSE University (2nd year, CSE program)
+                </h2>
+              </div>
+            </div>
+          </div>
+          <div class="about__bottom">
+            <div class="container">
+              <div class="about__bottom-inner">
+                <div class="about__left">
+                  <img src="./img/my_photo_1.jpg" alt="" />
+                  <div class="about_author about_small-screen">
+                    <p>Viktoriia Chelpykh</p>
+                    <p>Second-year student at MIEM HSE</p>
+                  </div>
+                </div>
+                <div class="about_right">
+                  <ul class="about_info">
+                    <li class="about_info-item">
+                      <p>
+                        Before starting development, I studied the general
+                        theory of computer graphics. I then moved on to the
+                        materials needed to build the service: I familiarized
+                        myself with the OpenCV library and subsequently with
+                        MediaPipe.
+                      </p>
+                      <p>
+                        Among MediaPipe's computer vision models, I chose
+                        Holistic — it accurately detects the face and its
+                        contours, and also gives access to hands, legs, and
+                        torso. This allows the project to be expanded with new
+                        features in the future.
+                      </p>
+                    </li>
+                    <li class="about_info-item">
+                      <p>
+                        Additionally, I already had a background in frontend and
+                        backend development. I was familiar with HTML, CSS, Go,
+                        Python, and had basic knowledge of JavaScript.
+                      </p>
+                      <p>
+                        During this project, I learned how to connect the
+                        frontend with the backend using JavaScript, and I
+                        figured out how to make a website responsive and
+                        interactive. I also studied FastAPI to implement the
+                        Python service.
+                      </p>
+                    </li>
+                  </ul>
+                  <div class="about_author about_big-screen">
+                    <p>Viktoriia Chelpykh</p>
+                    <p>Second-year student at MIEM HSE</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section class="for">
+          <div class="for__top">
+            <div class="container">
+              <div class="for__top-inner">
+                <div class="for__descriptor descriptor">/ For whom</div>
+                <h2 class="for__heading">For everyone who works with video</h2>
+              </div>
+            </div>
+          </div>
+          <div class="for__bottom">
+            <div class="container">
+              <ul class="for__list">
+                <li class="for__list-item">
+                  <div class="for__list-text">
+                    Bloggers
+                    <p>
+                      blur the faces of passersby in vlogs and avoid violating
+                      privacy
+                    </p>
+                  </div>
+                  <img src="./img/bloggers.jpg" alt="" />
+                </li>
+                <li class="for__list-item">
+                  <div class="for__list-text">
+                    Journalists
+                    <p>protect sources and anonymous subjects of reports</p>
+                  </div>
+                  <img src="./img/journalists.jpg" alt="" />
+                </li>
+                <li class="for__list-item">
+                  <div class="for__list-text">
+                    HR and recruiters
+                    <p>conduct anonymous video interviews without bias</p>
+                  </div>
+                  <img src="./img/hrs.jpg" alt="" />
+                </li>
+                <li class="for__list-item">
+                  <div class="for__list-text">
+                    Doctors and psychologists
+                    <p>
+                      publish educational materials without revealing the
+                      patients' identities
+                    </p>
+                  </div>
+                  <img src="./img/doctors.jpg" alt="" />
+                </li>
+                <li class="for__list-item">
+                  <div class="for__list-text">
+                    For Schools and Universities
+                    <p>record lessons without showing the students' faces</p>
+                  </div>
+                  <img src="./img/universities.jpg" alt="" />
+                </li>
+                <li class="for__list-item">
+                  <div class="for__list-text">
+                    To everyone
+                    <p>
+                      share videos on social media without revealing the faces
+                      of loved ones
+                    </p>
+                  </div>
+                  <img src="./img/everyone.jpg" alt="" />
+                </li>
+              </ul>
+            </div>
+          </div>
+        </section>
+        <section class="tasks">
+          <div class="container">
+            <div class="tasks__heading">
+              <div class="tasks__descriptor descriptor">/ Tasks</div>
+              <h2>What needed to be done</h2>
+            </div>
+            <div class="tasks__lists">
+              <ul class="tasks__list">
+                <li class="tasks__list-item">
+                  <div class="tasks__paragraph">
+                    <h4>Service design</h4>
+                    <p>
+                      Develop sections and blocks, and devise user-friendly
+                      navigation and visuals that inspire trust in potential
+                      clients
+                    </p>
+                  </div>
+                  <img
+                    src="./img/service_design.svg"
+                    alt=""
+                    class="tasks__img"
+                  />
+                </li>
+                <li class="tasks__list-item">
+                  <img src="./img/go_service.svg" alt="" class="tasks__img" />
+                  <div class="tasks__paragraph">
+                    <h4>Go service</h4>
+                    <p>
+                      Implement a main server that accepts requests from the
+                      frontend, interacts with the Python service, saves video,
+                      and stores metadata in the database
+                    </p>
+                  </div>
+                </li>
+              </ul>
+              <ul class="tasks__list">
+                <li class="tasks__list-item">
+                  <div class="tasks__paragraph">
+                    <h4>Frontend</h4>
+                    <p>
+                      Build a responsive website that works correctly on all
+                      devices, from smartphones to desktops
+                    </p>
+                  </div>
+                  <img src="./img/frontend.svg" alt="" class="tasks__img" />
+                </li>
+                <p class="tasks__big_logo">facelab</p>
+                <li class="tasks__list-item">
+                  <img src="./img/integration.svg" alt="" class="tasks__img" />
+                  <div class="tasks__paragraph">
+                    <h4>Frontend-backend integration</h4>
+                    <p>
+                      Set up data exchange via HTTP and JavaScript so that the
+                      user can upload a video and receive the result
+                    </p>
+                  </div>
+                </li>
+              </ul>
+              <ul class="tasks__list">
+                <li class="tasks__list-item">
+                  <div class="tasks__paragraph">
+                    <h4>Python service</h4>
+                    <p>
+                      Implement a backend for video processing: face blurring
+                      using MediaPipe and OpenCV
+                    </p>
+                  </div>
+                  <img src="./img/blur.svg" alt="" class="tasks__img" />
+                </li>
+                <li class="tasks__list-item">
+                  <img src="./img/testing.svg" alt="" class="tasks__img" />
+                  <div class="tasks__paragraph">
+                    <h4>Testing and debugging</h4>
+                    <p>
+                      Verify all service components: upload, processing, and
+                      rendering. Ensure correct video blurring, error-free
+                      interface, and stable Go + Python + Frontend integration.
+                    </p>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </section>
+        <section class="solutions">
+          <div class="solutions__top">
+            <div class="container">
+              <div class="solutions__top-inner">
+                <div class="solutions__descriptor descriptor">/ solutions</div>
+                <h2>Implementation approach</h2>
+              </div>
+            </div>
+          </div>
+          <div class="solutions__bottom">
+            <div class="container">
+              <div class="solutions__bottom-inner">
+                <ul class="solutions__steps">
+                  <li class="solutions__step">
+                    <div class="solutions__number">01</div>
+                    <div class="solutions__card">
+                      <div class="solutions__content">
+                        <h5 class="solutions__card-descriptor">
+                          Python service
+                        </h5>
+                        <p class="solutions__card-paragraph">
+                          Face-blurring service using OpenCV, MediaPipe, and
+                          NumPy with the Holistic model — it tracks facial
+                          contours accurately, even when the person moves.
+                        </p>
+                        <p class="solutions__card-paragraph">
+                          A function maps connected facial points — triangles
+                          between them, plus eye and lip contours — and all
+                          further logic uses these points.
+                        </p>
+                      </div>
+                      <div class="solutions__card-img">
+                        <img src="./img/python.jpg" alt="" />
+                      </div>
+                    </div>
+                  </li>
+                  <li class="solutions__step">
+                    <div class="solutions__number">02</div>
+                    <div class="solutions__card">
+                      <div class="solutions__content">
+                        <h5 class="solutions__card-descriptor">Go service</h5>
+                        <p class="solutions__card-paragraph">
+                          Built with Clean Architecture. Server runs in Docker.
+                          Metadata stored in PostgreSQL. Logging and middleware
+                          implemented. Connection pool, env variables, and
+                          Makefile set up.
+                        </p>
+                      </div>
+                      <div class="solutions__card-img">
+                        <img src="./img/go.jpg" alt="" />
+                      </div>
+                    </div>
+                  </li>
+                  <li class="solutions__step">
+                    <div class="solutions__number">03</div>
+                    <div class="solutions__card">
+                      <div class="solutions__content">
+                        <h5 class="solutions__card-descriptor">Design</h5>
+                        <p class="solutions__card-paragraph">
+                          I analyzed the format and design style for the
+                          service. To convey reliability, I chose rounded shapes
+                          and a dominant blue color. Then I created the
+                          wireframe, integrated text, refined details, and built
+                          the responsive versions.
+                        </p>
+                      </div>
+                      <div class="solutions__card-img">
+                        <img src="./img/design.jpg" alt="" />
+                      </div>
+                    </div>
+                  </li>
+                  <li class="solutions__step">
+                    <div class="solutions__number">04</div>
+                    <div class="solutions__card">
+                      <div class="solutions__content">
+                        <h5 class="solutions__card-descriptor">Frontend</h5>
+                        <p class="solutions__card-paragraph">
+                          Designed the website using HTML and CSS. I made an
+                          interactive in JavaScript and connected the frontend
+                          to the backend via JavaScript.
+                        </p>
+                      </div>
+                      <div class="solutions__card-img">
+                        <img src="./img/frontend.jpg" alt="" />
+                      </div>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section class="touch">
+          <div class="touch__top">
+            <div class="container">
+              <div class="touch__top-inner">
+                <div class="touch__descriptor descriptor">/ Get in touch</div>
+                <h2>Do you have any questions or suggestions?</h2>
+              </div>
+            </div>
+          </div>
+          <div class="touch__bottom">
+            <div class="container">
+              <div class="touch_bottom-inner">
+                <div class="touch__left">
+                  <div class="touch__left-inner">
+                    <img src="./img/my_photo_2.jpg" alt="" />
+                    <p>Viktoriia Chelpykh</p>
+                  </div>
+                  <div class="touch__right-inner">
+                    <div class="touch__author-phone">
+                      <h4>Phone number</h4>
+                      <p>+7(908)177-18-51</p>
+                    </div>
+                    <div class="touch__author-email">
+                      <h4>Email</h4>
+                      <p>vika.chelpykh@mail.ru</p>
+                    </div>
+                    <div class="touch__author-media">
+                      <a href="https://github.com/vielchelpykh">
+                        <img src="./img/github.svg" alt="" />
+                      </a>
+                      <a href="https://leetcode.com/u/vielchelpykh/">
+                        <img src="./img/leetcode.svg" alt="" />
+                      </a>
+                      <a href="https://www.behance.net/vielchelpykh">
+                        <img src="./img/behance.svg" alt="" />
+                      </a>
+                    </div>
+                  </div>
+                </div>
+                <div class="touch__rigth">
+                  <form action="" class="touch__form">
+                    <input
+                      type="text"
+                      placeholder="Full name"
+                      class="touch__name"
+                    />
+                    <input
+                      type="tel"
+                      placeholder="Your phone"
+                      class="touch__phone"
+                    />
+                    <input
+                      type="email"
+                      placeholder="Your email"
+                      class="touch__email"
+                    />
+                    <input
+                      type="text"
+                      placeholder="Your message"
+                      class="touch__message"
+                    />
+                    <div class="touch__data">
+                      <input
+                        type="checkbox"
+                        placeholder="Your message"
+                        class="touch__checkbox"
+                      />
+                      <p class="touch__text">
+                        I consent to the processing of
+                        <strong>my personal data</strong>
+                      </p>
+                    </div>
+                    <button class="touch__button button">Send</button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+      <footer id="footer"></footer>
+    </div>
+  </body>
+  <script src="./js/header.js"></script>
+  <script src="./js/footer.js"></script>
+</html>

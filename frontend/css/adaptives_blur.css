@@ -1,0 +1,13 @@
+@media (max-width: 920px) {
+    .video__inner {
+        flex-direction: column;
+    }
+    .window {
+        flex: 1;
+    }
+}
+@media (max-width: 550px) {
+    .header__nav-link img {
+        display: none;
+    }
+}

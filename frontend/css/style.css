@@ -1,0 +1,12 @@
+@import url(./common.css);
+
+@import url(./header.css);
+@import url(./footer.css);
+
+@import url(./hero.css);
+@import url(./blur.css);
+@import url("./camera.css");
+
+@import url("adaptives_hero_header_footer.css");
+@import url("adaptives_blur.css");
+@import url("adaptives_camera.css");

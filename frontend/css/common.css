@@ -1,0 +1,65 @@
+body,
+html {
+  font:
+    500 18px "Manrope",
+    sans-serif;
+  color: #000;
+  background-color: #ebebeb;
+}
+.wrapper {
+  min-height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+.container {
+  max-width: 1770px;
+  height: 100%;
+  padding: 0 25px;
+  margin: 0 auto;
+}
+.button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 50px;
+  background: linear-gradient(90deg, #2568ff 0%, #00178a 100%);
+  border-radius: 50px;
+  font:
+    700 22px "Manrope",
+    sans-serif;
+  color: #fff;
+}
+h1 {
+  font:
+    700 64px / 1.25 "Manrope",
+    sans-serif;
+  color: #fff;
+}
+h2 {
+  font:
+    700 38px / 1.57895 "Manrope",
+    sans-serif;
+  background: linear-gradient(90deg, #2568ff 0%, #00178a 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+h3 {
+  font:
+    700 30px / 2 "Manrope",
+    sans-serif;
+  color: #000;
+}
+h4 {
+  font:
+    700 22px "Manrope",
+    sans-serif;
+  color: #000;
+}
+.descriptor {
+  font:
+    500 16px "Manrope",
+    sans-serif;
+  text-transform: uppercase;
+  color: #000;
+}
